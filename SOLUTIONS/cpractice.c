@@ -26,9 +26,15 @@ int *compute_scaled_array(int *arr, int a, int c, int size)
     if (result == NULL)
         return NULL;
 
-    for (int i = 0; i < size; i++)
+    int *src = arr;
+    int *dst = result;
+    int *end = arr + size;
+
+    while (src < end)
     {
-        result[i] = a * arr[i] + c;
+        *dst = a * (*src) + c;
+        src++;
+        dst++;
     }
 
     return result;
@@ -40,10 +46,13 @@ int sum_array_and_release(int *arr, int size)
         return 0;
 
     int sum = 0;
+    int *ptr = arr;
+    int *end = arr + size;
 
-    for (int i = 0; i < size; i++)
+    while (ptr < end)
     {
-        sum += arr[i];
+        sum += *ptr;
+        ptr++;
     }
 
     free(arr);
